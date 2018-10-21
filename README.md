@@ -2,9 +2,9 @@
 
 ![Byropoint](img/logo.png)
 
-Team Byropoint's hack for NaijaHacks 2018 is a simple educational app that provides daily tips on maintaining good personal hygiene and sustainable environmental sanity. he live version of the project can be viewed [here](https://github.com/davidconoh.github.io/naijahacks-byropoint)
+Team Byropoint's hack for NaijaHacks 2018 is a simple educational app that provides daily tips on maintaining good personal hygiene and sustainable environmental sanity. The live version of the project can be viewed [here](https://github.com/davidconoh.github.io/naijahacks-byropoint)
 
-This project aims to be very beginner friendly and to advocate simplicity and clarity, using the KISS model (Keep It Simple Stupid).
+This project aims to be very beginner friendly and advocate simplicity and clarity using the KISS model (Keep It Simple Stupid).
 
 ## Problem Statement
 
@@ -16,7 +16,7 @@ By introducing byte-sized, understandable resources that educate the common man 
 
 ## ⚠️ Caution
 
-Although this is an open source project, external contributions are not welcomed at the moment following the laid down rules for participating in [NaijaHacks](https://naijahacks.com). Eager contributors should be patient enough to wait for the duration of NaijaHacks.
+Although this is an open source project, external contributions are not welcomed at the moment following the laid down rules for participating in [NaijaHacks](https://naijahacks.com). Eager contributors should be patient enough to wait for the duration of NaijaHacks 2018 which runs from 17th to 25th October, 2018.
 
 ## ⚠️ Rules
 
@@ -55,5 +55,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## ✔️✔️✔️ Acknowledgment
 
 * [NaijaHacks](http://naijahacks.com/)
+* [Hacktoberfest](https://hacktoberfest.digitalocean.com)
+* [Rad5 Tech Hub](https://rad5.com.ng)
 
 :wink:
