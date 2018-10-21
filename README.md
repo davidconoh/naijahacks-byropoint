@@ -32,7 +32,7 @@ At the moment, this project doesn't require you running a live server on your lo
 
 ## Built With
 
-* [HTML, CSS & Javascript](#) - Web Technologies
+* [HTML, CSS & Javascript](https://) - Web Technologies
 * [Git](https://git-scm.com) - Version Control System
 
 ## ➕ Contributing
@@ -46,7 +46,8 @@ We use [Git](https://git-scm.com/) for versioning. For the versions available, s
 ## 📖 Authors
 
 * David C. Onoh [davidconoh](https://github.com/davidconoh)
-* Levi Chimezie [newtmex](https://github.com/newtmex) 
+* Levi Chimezie [newtmex](https://github.com/newtmex)
+* Mohd Bayero Yayandi [byruzyayandy1](https://github.com/byruzyayandy1)
 
 ## ✔️ License
 

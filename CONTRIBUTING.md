@@ -20,3 +20,4 @@ Please, first read our [CODE OF CONDUCT](CODE_OF_CONDUCT.md), as a guide to all 
 
 - Levi Chimezie [newtmex](https://github.com/newtmex)
 - David C. [@davidconoh](https://github.com/davidconoh)
+- Mohd Bayero Yayandi [byruzyayandy1](https://github.com/byruzyayandy1)
