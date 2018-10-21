@@ -56,6 +56,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 * [NaijaHacks](http://naijahacks.com/)
 * [Hacktoberfest](https://hacktoberfest.digitalocean.com)
-* [Rad5 Tech Hub](https://rad5.com.ng)
+* [Rad5 Tech Hub](http://rad5.com.ng)
 
 :wink:
