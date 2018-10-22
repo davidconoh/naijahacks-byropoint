@@ -24,6 +24,8 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', event => {
+  if(event.request.method == 'POST') return;
+
   event.respondWith(
     fetch(event.request)
       .then(res => {
@@ -42,4 +44,14 @@ self.addEventListener('fetch', event => {
         return caches.match(event.request).then(res => res);
       })
   );
-})
+});
+
+self.addEventListener("push", e => {
+  const data = e.data.json();
+  console.log("Push Recieved...");
+  self.registration.showNotification(data.title, {
+    body: data.body,
+    icon: "img/favicon.ico"
+  });
+  console.log(data)
+});
