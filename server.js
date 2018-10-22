@@ -2,7 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
-const webpush =  require('web-push');
+const webpush = require('web-push');
+const subService = require('./services/subscription');
 
 const app = express();
 const PORT = 8080;
@@ -28,17 +29,33 @@ app.post("/subscribe", (req, res) => {
   const subscription = req.body;
 
   // Store subscription in db
-  
-  // Send 201 - resource created
-  res.status(201).json({});
+  subService.add(subscription).then(done => {
+    // Stored succesfully
 
-  // Create payload
-  const payload = JSON.stringify({ title: 'Welcome', body: "Thanks for subscribing"});
+    // Send 201 - resource created
+    res.status(201).json({});
 
-  // Pass object into sendNotification
-  webpush
-    .sendNotification(subscription, payload)
-    .catch(err => console.error(err));
+    // Create payload
+    const payload = JSON.stringify({ title: 'Welcome', body: "Thanks for subscribing" });
+
+    // Pass object into sendNotification
+    webpush
+      .sendNotification(subscription, payload)
+      .catch(err => console.error(err));
+  }).catch(err=>{
+    // Not stored succesfully
+
+    // Send 201 - resource created
+    res.status(201).json({});
+
+    // Create payload
+    const payload = JSON.stringify({ title: 'Error', body: "Not subscribed, please refresh your page" });
+
+    // Pass object into sendNotification
+    webpush
+      .sendNotification(subscription, payload)
+      .catch(err => console.error(err));
+    });
 });
 
 
@@ -46,7 +63,7 @@ app.post("/subscribe", (req, res) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Routes
-app.get('/', (req, res)=>{
+app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'public/index.html'));
 })
 
