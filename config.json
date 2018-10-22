@@ -1,0 +1,4 @@
+﻿{
+    "connectionString": "mongodb://localhost/naijahacks-byropoint",
+    "secret": "eyJhbGciOiJUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1YjlmYzhkMDk3ZTIxNGJlMGU4YmYzODkiLCJpYXQiOjE1MzcxOTg1MzF9.p7_12m91NCztdBlvq1A989O9q2jEt-0x_3-qxRPmfZ0"
+}
