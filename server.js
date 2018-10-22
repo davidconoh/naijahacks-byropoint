@@ -18,7 +18,7 @@ const publicVapidKey =
 const privateVapidKey = "zSfu6TekwBv8tgpukQ27pDP_bFGLSxiye3p-TK15qf8";
 
 webpush.setVapidDetails(
-  "mailto:test@test.com",
+  "mailto:brigtomex@gmail.com",
   publicVapidKey,
   privateVapidKey
 );
@@ -28,34 +28,41 @@ app.post("/subscribe", (req, res) => {
   // Get pushSubscription object
   const subscription = req.body;
 
-  // Store subscription in db
-  subService.add(subscription).then(done => {
-    // Stored succesfully
+  subService.findOne(subscription).then(done => {
+    // it exists
+    res.json({});
+  }).catch(err => {
+    // It does not
+    // Store subscription in db
+    subService.add(subscription)
+      .then(done => {
+        // Stored succesfully
 
-    // Send 201 - resource created
-    res.status(201).json({});
+        // Send 201 - resource created
+        res.status(201).json({});
 
-    // Create payload
-    const payload = JSON.stringify({ title: 'Welcome', body: "Thanks for subscribing" });
+        // Create payload
+        const payload = JSON.stringify({ title: 'Welcome', body: "Thanks for subscribing" });
 
-    // Pass object into sendNotification
-    webpush
-      .sendNotification(subscription, payload)
-      .catch(err => console.error(err));
-  }).catch(err=>{
-    // Not stored succesfully
+        // Pass object into sendNotification
+        webpush
+          .sendNotification(subscription, payload)
+          .catch(err => console.error(err));
+      }).catch(err => {
+        // Not stored succesfully
 
-    // Send 201 - resource created
-    res.status(201).json({});
+        // Send 201 - resource created
+        res.status(201).json({});
 
-    // Create payload
-    const payload = JSON.stringify({ title: 'Error', body: "Not subscribed, please refresh your page" });
+        // Create payload
+        const payload = JSON.stringify({ title: 'Error', body: "Not subscribed, please refresh your page" });
 
-    // Pass object into sendNotification
-    webpush
-      .sendNotification(subscription, payload)
-      .catch(err => console.error(err));
-    });
+        // Pass object into sendNotification
+        webpush
+          .sendNotification(subscription, payload)
+          .catch(err => console.error(err));
+      });
+  })
 });
 
 
