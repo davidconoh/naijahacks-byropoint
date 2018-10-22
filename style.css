@@ -1,0 +1,37 @@
+nav ul {
+    text-align: right;
+    position: fixed;
+    width: 100%;
+    background-color: #e0ebe8;
+  }
+  
+  nav ul li {
+    display: inline-block;
+    margin: 55px;
+    margin-bottom: 15px;
+    margin-top: 25px;
+  }
+  
+  nav ul li a {
+    color: #008080;
+    text-decoration: none;
+  }
+  
+  nav ul li a:hover {
+    color: green;
+  }
+  
+  .work {
+    padding-top: 60px;
+    margin-top: -60px;
+  }
+  
+  .work .work-header {
+    margin-top: 50px;
+    color: #008080;
+    font-weight: normal;
+  }
+  .logo_name{
+    font-size: xx-large;
+    text-align: center;
+  }
