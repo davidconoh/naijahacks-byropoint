@@ -1,0 +1,30 @@
+{
+  "name": "byropoint",
+  "version": "0.0.1",
+  "description": "An enviromental health education app",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newtmex/naijahacks-byropoint.git"
+  },
+  "keywords": [
+    "environmental",
+    "health",
+    "naija-hacks"
+  ],
+  "author": "Levi Chimezie",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/newtmex/naijahacks-byropoint/issues"
+  },
+  "homepage": "https://github.com/newtmex/naijahacks-byropoint#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "express": "^4.16.3"
+  }
+}
