@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
 const webpush = require('web-push');
+const request = require('request');
 const subService = require('./services/subscription');
 
 const app = express();
