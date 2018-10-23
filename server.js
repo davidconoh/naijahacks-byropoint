@@ -192,6 +192,29 @@ function getPostRemote() {
   })
 }
 
+function pushNewPost(post) {
+  // Get all subscribers
+  subService.getAll().then(subs => {
+    // Send them push notification
+    subs.forEach(sub => {
+      // Send latest article
+      const payload = JSON.stringify({
+        notification: {
+          title: 'New Article',
+          body: "Check app"
+        },
+        article: post
+      });
+
+      res.status(201).json({});
+
+      // Pass object into sendNotification
+      webpush
+        .sendNotification(sub, payload)
+        .catch(err => console.error(err));
+    })
+  })
+}
 // Serve static files
 app.use(express.static(path.join('public')));
 
