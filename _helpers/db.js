@@ -4,5 +4,6 @@ mongoose.connect(config.connectionString,{ useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 module.exports = {
-    Subscription: require('../models/subscription')
+    Subscription: require('../models/subscription'),
+    Post: require('../models/post'),
 };
