@@ -84,6 +84,12 @@ app.post("/subscribe", (req, res) => {
   })
 });
 
+// Article route
+app.post('/article/latest', (req,res)=>{
+  console.log(req.body)
+  res.send({done:1})
+})
+
 
 // Serve static files
 app.use(express.static(path.join('public')));
