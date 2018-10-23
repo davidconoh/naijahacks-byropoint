@@ -4,7 +4,8 @@ const Subscription = db.Subscription;
 module.exports = {
   add,
   _delete,
-  findOne
+  findOne,
+  getAll
 };
 
 async function add(newSub) {
@@ -19,4 +20,8 @@ async function findOne(sub) {
 
 async function _delete(id) {
     await Subscription.findByIdAndRemove(id);
+}
+
+async function getAll(){
+    return await Subscription.find();
 }
