@@ -91,8 +91,9 @@ app.post('/article/latest', (req,res)=>{
   webpush
     .sendNotification(subscription, payload)
     .catch(err => console.error(err));
-})
+});
 
+// Periodic update of articles
 
 // Serve static files
 app.use(express.static(path.join('public')));
