@@ -12,6 +12,7 @@
   // Updates articles from server or localStorage
   app.updateArticle = function (data) {
     // Build html
+    console.log(data);
     let html = '';
     html += `
     <h2>${data.title}</h1>
