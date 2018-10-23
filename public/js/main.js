@@ -11,6 +11,14 @@
 
   // Updates articles from server or localStorage
   app.updateArticle = function (data) {
+    if (!app.isLoading) {
+      app.spinner.setAttribute('hidden', false);
+      app.isLoading = true;
+    }
+
+    let article = document.getElementById('article');
+    article.removeAttribute('hidden', true);
+    article.innerHTML = '';
     // Build html
     console.log(data);
     let html = '';
@@ -25,8 +33,6 @@
     html += `</ul>
     <small>Date: ${new Date(data.createdAt).toLocaleString()}</small>
     `
-
-    let article = document.getElementById('article');
     article.removeAttribute('hidden');
     article.innerHTML = html;
 

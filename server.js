@@ -92,6 +92,7 @@ function updatePosts() {
               // Extract params
               const { id, title, createdAt } = Post[new_post];
               // Compare if the in coming is latest
+
               if (post.createdAt === createdAt) {
                 console.log('No new post');
                 working = false;
@@ -150,7 +151,7 @@ updatePosts.called = false;
 // Capture an instance of updatePosts()
 updatePosts = updatePosts();
 
-setInterval(updatePosts, 30000);
+setInterval(updatePosts, 10000);
 
 // Get post
 function getPostRemote() {
