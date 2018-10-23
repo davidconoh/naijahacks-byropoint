@@ -101,7 +101,7 @@ function updatePosts() {
                 // Add it and send it to users
                 // Get texts only from the paragraphs
                 let paragraphs = Post[post].previewContent
-                  .bodyModel.paragraphs.map(para => para.tetx);
+                  .bodyModel.paragraphs.map(para => para.text);
                 // Get the subtitle
                 let subtitle = Post[post].previewContent.bodyModel.subtitle;
                 let newPost = { paragraphs, id, title, createdAt, subtitle };
@@ -125,7 +125,7 @@ function updatePosts() {
               const { id, title, createdAt } = Post[post];
               // Get texts only from the paragraphs
               let paragraphs = Post[post].previewContent
-                .bodyModel.paragraphs.map(para => para.tetx);
+                .bodyModel.paragraphs.map(para => para.text);
               // Get the subtitle
               let subtitle = Post[post].previewContent.bodyModel.subtitle;
 
