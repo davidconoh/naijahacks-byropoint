@@ -11,15 +11,24 @@
 
   // Updates articles from server or localStorage
   app.updateArticle = function (data) {
-    let heading = document.getElementById('heading');
-    let body = document.getElementById('body');
-    // Set the heading
-    heading.textContent = data.heading;
-    // Set the body
-    body.textContent = data.body;
-    // Display the block
+    // Build html
+    let html = '';
+    html += `
+    <h2>${data.title}</h1>
+    <h5>${data.subtitle || ''}</h5>
+    <ul>
+    `
+    data.paragraphs.forEach(para => {
+      html += `<li>${para}</li>`
+    });
+    html += `</ul>
+    <small>Date: ${new Date(data.createdAt).toLocaleString()}</small>
+    `
+
     let article = document.getElementById('article');
     article.removeAttribute('hidden');
+    article.innerHTML = html;
+
 
     // Remove spinner
     if (app.isLoading) {
@@ -95,7 +104,7 @@
                 console.error('Unable to subscribe to push', err);
               }
             });
-          }).catch(err=>console.log(err));
+          }).catch(err => console.log(err));
         } else {
           // Subscribed
           // Get data, with this subscription object
@@ -107,7 +116,7 @@
               "content-type": "application/json"
             }
           }).then(res => console.log(res))
-            .catch(err=>console.log(err))
+            .catch(err => console.log(err))
         }
       })
     }).catch(err => console.log('Service worker reg failed.'));
