@@ -68,11 +68,6 @@ app.post("/subscribe", (req, res) => {
 
 
 // Serve static files
-app.use(express.static(path.join(__dirname, '/public')));
-
-// Routes
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '/public/index.html'));
-})
+app.use(express.static(path.join('public')));
 
 app.listen(PORT, () => console.log(`server running at port: ${PORT}`))
