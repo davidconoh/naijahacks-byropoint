@@ -29,34 +29,22 @@ app.post("/subscribe", (req, res) => {
   // Get pushSubscription object
   const subscription = req.body;
 
-  subService.findOne(subscription).then(done => {
-    // it exists
-    // Send latest article
-    res.json({
-      notification: {
-        title: 'New Article',
-        body: "Check app"
-      },
-      article: {
-        heading: 'Test',
-        body: 'Hello, health world!'
-      }
-    });
-  }).catch(err => {
-    // It does not
     // Store subscription in db
     subService.add(subscription)
       .then(done => {
         // Stored succesfully
-
         // Send 201 - resource created
         res.status(201).json({});
-
+        // Send latest article
         // Create payload
         const payload = JSON.stringify({
           notification: {
-            title: 'Welcome',
-            body: "Thanks for subscribing"
+            title: 'New Article',
+            body: "Check app"
+          },
+          article: {
+            heading: 'Test',
+            body: 'Hello, health world!'
           }
         });
 
@@ -66,10 +54,7 @@ app.post("/subscribe", (req, res) => {
           .catch(err => console.error(err));
       }).catch(err => {
         // Not stored succesfully
-
-        // Send 201 - resource created
-        res.status(201).json({});
-
+        // TODO check if the error is due to the existence of the subscription in the database
         // Create payload
         const payload = JSON.stringify({ notification: {
           title: 'Error', 
@@ -81,13 +66,27 @@ app.post("/subscribe", (req, res) => {
           .sendNotification(subscription, payload)
           .catch(err => console.error(err));
       });
-  })
 });
 
 // Article route
 app.post('/article/latest', (req,res)=>{
-  console.log(req.body)
-  res.send({done:1})
+  let subscription = req.body;
+  // Send latest article
+  const payload = JSON.stringify({
+    notification: {
+      title: 'New Article',
+      body: "Check app"
+    },
+    article: {
+      heading: 'Test',
+      body: 'Hello, health world!'
+    }
+  });
+
+  // Pass object into sendNotification
+  webpush
+    .sendNotification(subscription, payload)
+    .catch(err => console.error(err));
 })
 
 
