@@ -173,8 +173,10 @@ function getPostRemote() {
 function pushNewPost(post) {
   // Get all subscribers
   subService.getAll().then(subs => {
+    console.log('Pushing to ' + subs.length + ' subscribers')
     // Send them push notification
     subs.forEach(sub => {
+      console.log('pushed..')
       // Send latest article
       pushPost_single(post, sub.subscription);
     })
