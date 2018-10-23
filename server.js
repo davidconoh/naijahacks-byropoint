@@ -36,7 +36,7 @@ app.post("/subscribe", (req, res) => {
     .then(done => {
 
       Post.findOne().sort({ createdAt: -1 }).exec(function (err, post) {
-        if(post){
+        if (post) {
           pushPost_single(post, subscription);
         }
       });
@@ -66,7 +66,7 @@ app.post('/article/latest', (req, res) => {
   let subscription = req.body;
 
   Post.findOne().sort({ createdAt: -1 }).exec(function (err, post) {
-    if(post){
+    if (post) {
       pushPost_single(post, subscription);
     }
   });
@@ -82,7 +82,7 @@ function updatePosts() {
 
     return function () {
       if (working) //return console.log('working...');
-      working = true;
+        working = true;
       Post.findOne().sort({ createdAt: -1 }).exec(function (err, post) {
         if (post) {
           // Post exit
@@ -176,14 +176,14 @@ function pushNewPost(post) {
     console.log('Pushing to ' + subs.length + ' subscribers')
     // Send them push notification
     subs.forEach(sub => {
-      console.log('pushed..')
+      console.log('pushing..')
       // Send latest article
       pushPost_single(post, sub.subscription);
     })
   })
 }
 
-function pushPost_single (post, sub){
+function pushPost_single(post, sub) {
   const payload = JSON.stringify({
     notification: {
       title: 'New Article',
@@ -193,7 +193,8 @@ function pushPost_single (post, sub){
   });
 
   // Pass object into sendNotification
-  webpush.sendNotification(sub, payload)
+  webpush.sendNotification(sub, payload).then(re =>{
+    console.log('pushed single..')})
     .catch(err => console.error(err));
 }
 
