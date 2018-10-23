@@ -7,7 +7,7 @@
     visibleCards: {},
     selectedCities: [],
     spinner: document.querySelector('.loader'),
-    cardTemplate: document.querySelector('.cardTemplate'),
+    articleTemplate: document.querySelector('.article'),
     container: document.querySelector('.main'),
     addDialog: document.querySelector('.dialog-container'),
     daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
@@ -38,7 +38,12 @@
 
   // Updates articles from server or localStorage
   app.updateArticle = function (data) {
-
+    let article = app.articleTemplate.cloneNode(true);
+    article.removeAttribute('hidden');
+    article.querySelector('#article').textContent = `
+    <h1>${data.heading}</h1>
+    <p>${data.body}</p>
+    `
     // Remove spinner
     if (app.isLoading) {
       app.spinner.setAttribute('hidden', true);
@@ -114,7 +119,7 @@
                 console.error('Unable to subscribe to push', err);
               }
             });
-          });
+          }).catch(err=>console.log(err));
         } else {
           // Subscribed
           // Get data, with this subscription object
@@ -132,6 +137,7 @@
 
     // Listen to messages from service workers.
     navigator.serviceWorker.addEventListener('message', function (event) {
+      app.updateArticle(event.data);
       console.log("Got reply from service worker: ", event.data);
     });
   }
