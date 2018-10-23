@@ -83,6 +83,7 @@
 
   // Check for service worker
   if ("serviceWorker" in navigator) {
+    // Register it
     navigator.serviceWorker.register('../sw.js').then(reg => {
       console.log('Service worker registered!');
       reg.pushManager.getSubscription().then(subscription => {
@@ -119,7 +120,7 @@
           // Get data, with this subscription object
           fetch('/article/latest/', {
             method: 'POST',
-            body: JSON.stringify({ subscription }),
+            body: JSON.stringify(subscription),
             headers: {
               "content-type": "application/json"
             }
@@ -127,9 +128,14 @@
             .catch(err=>console.log(err))
         }
       })
-    }).catch(err => console.log('Service worker reg failed.'))
+    }).catch(err => console.log('Service worker reg failed.'));
+
+    // Listen to messages from service workers.
+    navigator.serviceWorker.addEventListener('message', function (event) {
+      console.log("Got reply from service worker: ", event.data);
+    });
   }
-  
+
   function urlBase64ToUint8Array(base64String) {
     const padding = "=".repeat((4 - base64String.length % 4) % 4);
     const base64 = (base64String + padding)
