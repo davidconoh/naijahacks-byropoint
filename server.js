@@ -61,6 +61,8 @@ app.post("/subscribe", (req, res) => {
           body: "Not subscribed, please refresh your page" 
         }});
 
+        res.status(201).json({});
+
         // Pass object into sendNotification
         webpush
           .sendNotification(subscription, payload)
@@ -82,6 +84,8 @@ app.post('/article/latest', (req,res)=>{
       body: 'Hello, health world!'
     }
   });
+
+  res.status(201).json({});
 
   // Pass object into sendNotification
   webpush
