@@ -31,7 +31,17 @@ app.post("/subscribe", (req, res) => {
 
   subService.findOne(subscription).then(done => {
     // it exists
-    res.json({});
+    // Send latest article
+    res.json({
+      notification: {
+        title: 'New Article',
+        body: "Check app"
+      },
+      article: {
+        heading: 'Test',
+        body: 'Hello, health world!'
+      }
+    });
   }).catch(err => {
     // It does not
     // Store subscription in db
@@ -43,7 +53,12 @@ app.post("/subscribe", (req, res) => {
         res.status(201).json({});
 
         // Create payload
-        const payload = JSON.stringify({ title: 'Welcome', body: "Thanks for subscribing" });
+        const payload = JSON.stringify({
+          notification: {
+            title: 'Welcome',
+            body: "Thanks for subscribing"
+          }
+        });
 
         // Pass object into sendNotification
         webpush
@@ -56,7 +71,10 @@ app.post("/subscribe", (req, res) => {
         res.status(201).json({});
 
         // Create payload
-        const payload = JSON.stringify({ title: 'Error', body: "Not subscribed, please refresh your page" });
+        const payload = JSON.stringify({ notification: {
+          title: 'Error', 
+          body: "Not subscribed, please refresh your page" 
+        }});
 
         // Pass object into sendNotification
         webpush

@@ -49,9 +49,29 @@ self.addEventListener('fetch', event => {
 self.addEventListener("push", e => {
   const data = e.data.json();
   console.log("Push Recieved...");
-  self.registration.showNotification(data.title, {
-    body: data.body,
+  self.registration.showNotification(data.notification.title, {
+    body: data.notification.body,
     icon: "img/favicon.ico"
   });
-  console.log(data)
+
+  // Send new data to display
+  clients.matchAll().then(clients => {
+    sendData(clients[0],data.article);
+  })
 });
+
+function sendData(client, data){
+  return new Promise(function(resolve, reject){
+      var msg_chan = new MessageChannel();
+
+      msg_chan.port1.onmessage = function(event){
+          if(event.data.error){
+              reject(event.data.error);
+          }else{
+              resolve(event.data);
+          }
+      };
+
+      client.postMessage(data, [msg_chan.port2]);
+  });
+}
