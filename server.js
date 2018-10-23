@@ -94,16 +94,16 @@ function updatePosts() {
               // Compare if the in coming is latest
               if (post.createdAt === createdAt) {
                 console.log('No new post');
-                working = false
+                working = false;
               } else {
                 // New post
                 console.log('New post found');
                 // Add it and send it to users
                 // Get texts only from the paragraphs
-                let paragraphs = Post[post].previewContent
+                let paragraphs = Post[new_post].previewContent
                   .bodyModel.paragraphs.map(para => para.text);
                 // Get the subtitle
-                let subtitle = Post[post].previewContent.bodyModel.subtitle;
+                let subtitle = Post[new_post].previewContent.bodyModel.subtitle;
                 let newPost = { paragraphs, id, title, createdAt, subtitle };
                 postService.add(newPost);
                 console.log('new post added');
@@ -149,7 +149,7 @@ updatePosts.called = false;
 // Capture an instance of updatePosts()
 updatePosts = updatePosts();
 
-setInterval(updatePosts, 30000);
+setInterval(updatePosts, 3000);
 
 // Get post
 function getPostRemote() {
@@ -174,7 +174,7 @@ function pushNewPost(post) {
     // Send them push notification
     subs.forEach(sub => {
       // Send latest article
-      pushPost_single(post, sub);
+      pushPost_single(post, sub.subscription);
     })
   })
 }
