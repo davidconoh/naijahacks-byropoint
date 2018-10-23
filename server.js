@@ -34,26 +34,13 @@ app.post("/subscribe", (req, res) => {
   // Store subscription in db
   subService.add(subscription)
     .then(done => {
-      // Stored succesfully
-      // Send 201 - resource created
-      res.status(201).json({});
-      // Send latest article
-      // Create payload
-      const payload = JSON.stringify({
-        notification: {
-          title: 'New Article',
-          body: "Check app"
-        },
-        article: {
-          heading: 'Test',
-          body: 'Hello, health world!'
+
+      Post.findOne().sort({ createdAt: -1 }).exec(function (err, post) {
+        if(post){
+          pushPost_single(post, subscription);
         }
       });
 
-      // Pass object into sendNotification
-      webpush
-        .sendNotification(subscription, payload)
-        .catch(err => console.error(err));
     }).catch(err => {
       // Not stored succesfully
       // TODO check if the error is due to the existence of the subscription in the database
@@ -77,24 +64,13 @@ app.post("/subscribe", (req, res) => {
 // Article route
 app.post('/article/latest', (req, res) => {
   let subscription = req.body;
-  // Send latest article
-  const payload = JSON.stringify({
-    notification: {
-      title: 'New Article',
-      body: "Check app"
-    },
-    article: {
-      heading: 'Test',
-      body: 'Hello, health world!'
+
+  Post.findOne().sort({ createdAt: -1 }).exec(function (err, post) {
+    if(post){
+      pushPost_single(post, subscription);
     }
   });
 
-  res.status(201).json({});
-
-  // Pass object into sendNotification
-  webpush
-    .sendNotification(subscription, payload)
-    .catch(err => console.error(err));
 });
 
 // Periodic update of articles
@@ -116,7 +92,7 @@ function updatePosts() {
               // Extract params
               const { id, title, createdAt } = Post[new_post];
               // Compare if the in coming is latest
-              if (post.createdAt == createdAt) {
+              if (post.createdAt === createdAt) {
                 console.log('No new post');
                 working = false
               } else {
@@ -173,7 +149,7 @@ updatePosts.called = false;
 // Capture an instance of updatePosts()
 updatePosts = updatePosts();
 
-setInterval(updatePosts, 1000);
+setInterval(updatePosts, 30000);
 
 // Get post
 function getPostRemote() {
@@ -198,23 +174,25 @@ function pushNewPost(post) {
     // Send them push notification
     subs.forEach(sub => {
       // Send latest article
-      const payload = JSON.stringify({
-        notification: {
-          title: 'New Article',
-          body: "Check app"
-        },
-        article: post
-      });
-
-      res.status(201).json({});
-
-      // Pass object into sendNotification
-      webpush
-        .sendNotification(sub, payload)
-        .catch(err => console.error(err));
+      pushPost_single(post, sub);
     })
   })
 }
+
+function pushPost_single (post, sub){
+  const payload = JSON.stringify({
+    notification: {
+      title: 'New Article',
+      body: "Check app"
+    },
+    article: post
+  });
+
+  // Pass object into sendNotification
+  webpush.sendNotification(sub, payload)
+    .catch(err => console.error(err));
+}
+
 // Serve static files
 app.use(express.static(path.join('public')));
 
