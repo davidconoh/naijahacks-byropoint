@@ -1,4 +1,4 @@
-const cacheName = 'byropoint-v1';
+const cacheName = 'byropoint-v2';
 
 const cacheAssets = [
   'index.html',
