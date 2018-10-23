@@ -1,10 +1,9 @@
 {
   "name": "Byropoint",
   "short_name": "Byropoint",
-  "theme_color": "#2196f3",
-  "background_color": "#2196f3",
+  "theme_color": "#4a44bb",
+  "background_color": "#3F51B",
   "display": "standalone",
-  "Scope": "/",
   "start_url": "/index.html",
   "icons": [
     {

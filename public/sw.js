@@ -52,7 +52,7 @@ self.addEventListener("push", e => {
   console.log("Push Recieved...");
   self.registration.showNotification(data.notification.title, {
     body: data.notification.body,
-    icon: "img/favicon.ico",
+    icon: "img/favicon.png",
     vibrate: [100, 50, 100],
   });
 

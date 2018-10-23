@@ -6,48 +6,24 @@
     isLoading: true,
     visibleCards: {},
     selectedCities: [],
-    spinner: document.querySelector('.loader'),
-    articleTemplate: document.querySelector('.article'),
-    container: document.querySelector('.main'),
-    addDialog: document.querySelector('.dialog-container'),
-    daysOfWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    spinner: document.querySelector('.loader')
   };
-
-
-  /*****************************************************************************
-   *
-   * Event listeners for UI elements
-   *
-   ****************************************************************************/
-
-  document.getElementById('butRefresh').addEventListener('click', function () {
-    // Refresh all of the forecasts
-    app.updateForecasts();
-  });
-
-  document.getElementById('butAdd').addEventListener('click', function () {
-    // Open/show the add new city dialog
-    app.toggleAddDialog(true);
-  });
-
-  /*****************************************************************************
-   *
-   * Methods to update/refresh the UI
-   *
-   ****************************************************************************/
 
   // Updates articles from server or localStorage
   app.updateArticle = function (data) {
-    let article = app.articleTemplate.cloneNode(true);
+    let heading = document.getElementById('heading');
+    let body = document.getElementById('body');
+    // Set the heading
+    heading.textContent = data.heading;
+    // Set the body
+    body.textContent = data.body;
+    // Display the block
+    let article = document.getElementById('article');
     article.removeAttribute('hidden');
-    article.querySelector('#article').textContent = `
-    <h1>${data.heading}</h1>
-    <p>${data.body}</p>
-    `
+
     // Remove spinner
     if (app.isLoading) {
       app.spinner.setAttribute('hidden', true);
-      app.container.removeAttribute('hidden');
       app.isLoading = false;
     }
   };
@@ -123,6 +99,7 @@
         } else {
           // Subscribed
           // Get data, with this subscription object
+          console.log('Fetching article');
           fetch('/article/latest/', {
             method: 'POST',
             body: JSON.stringify(subscription),
